@@ -1111,35 +1111,35 @@
 								<div class="table-reg">
 									<div class="col-xs-4">Surface Corrosion Protection</div>
 									<div class="col-xs-4">Not Covered</div>
-									<div class="col-xs-4">Lifetime</div>
+									<div class="col-xs-4">5/10 Years</div>
 								</div>
 								
 								<!-- Row 2 -->
 								<div class="table-reg">
 									<div class="col-xs-4">Resists Salt & Water</div>
 									<div class="col-xs-4">Not Covered</div>
-									<div class="col-xs-4">Lifetime</div>
+									<div class="col-xs-4">5/10 Years</div>
 								</div>
 								
 								<!-- Row 3 -->
 								<div class="table-reg">
 									<div class="col-xs-4">Bonds To Metal Surfaces</div>
 									<div class="col-xs-4">Not Covered</div>
-									<div class="col-xs-4">Lifetime</div>
+									<div class="col-xs-4">5/10 Years</div>
 								</div>
 								
 								<!-- Row 4 -->
 								<div class="table-reg">
 									<div class="col-xs-4">Electronic Fogging Method</div>
 									<div class="col-xs-4">Not Covered</div>
-									<div class="col-xs-4">Lifetime</div>
+									<div class="col-xs-4">5/10 Years</div>
 								</div>
 								
 								<!-- Row 5 -->
 								<div class="table-reg">
 									<div class="col-xs-4">Meets Military Specifications</div>
 									<div class="col-xs-4">Not Covered</div>
-									<div class="col-xs-4">Lifetime</div>
+									<div class="col-xs-4">5/10 Years</div>
 								</div>
 							</div>
 						</div>
