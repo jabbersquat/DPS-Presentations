@@ -879,14 +879,19 @@ table-reg:last-child > div {
 	background-color: #e9eaee;
 }
 
-#row-discount, #row-todaysprice {
+#row-discount, #row-todaysprice, 
+#addcov_prices_row-discount, #addcov_prices_row-todaysprice {
 	width: 100%;
 }
-.table-reg, .table-hdr, .table-foot, #row-discount, #row-todaysprice {
+.table-reg, .table-hdr, .table-foot, 
+#row-discount, #row-todaysprice,
+#addcov_prices_row-discount, #addcov_prices_row-todaysprice {
 	display: table;
 	float: none;
 }
-.table-reg > div, .table-hdr > div, .table-foot > div, #row-discount > div, #row-todaysprice > div  {
+.table-reg > div, .table-hdr > div, .table-foot > div, 
+#row-discount > div, #row-todaysprice > div, 
+#addcov_prices_row-discount > div, #addcov_prices_row-todaysprice > div  {
 	float: none;
 	display: table-cell;
 }
@@ -1071,6 +1076,76 @@ table-reg:last-child > div {
 	background-color: #fff;
 }
 #addcov-buttons .btn-primary.active {
+	background-color: #607D8B;
+}
+
+/*
+/*	
+/*	Additional Coverage Package 2020 (with prices) */
+/*
+*/
+#addcov_prices_row-discount, #addcov_prices_row-todaysprice {
+	opacity: 0;
+	color: #fff;
+	line-height: 1;
+	margin-bottom: 15px;
+	margin-top: 15px;
+	font-size: 1.15em;
+}
+#addcov_prices_row-discount > div, #addcov_prices_row-todaysprice > div {
+	border-right: 1px solid transparent;
+}
+#addcov_prices_row-discount > div:first-child, #addcov_prices_row-todaysprice > div:first-child {
+	border-left: 1px solid transparent;
+}
+#addcov_prices_row-discount:last-child > div, #addcov_prices_row-todaysprice:last-child > div {
+	border-bottom: 1px solid #000;
+}
+#addcov_prices_row-discount.makeVisible, #addcov_prices_row-todaysprice.makeVisible {
+	opacity: 1;
+}
+.btn-primary {
+	border-color: #000;
+}
+.btn-primary.active {
+	background-color: #e9eaee;
+	color: #000;
+}
+.discounts-hdr {
+	display: inline-block;
+	font-weight: bold;
+	font-size: 1.2em;
+	color: #fff;
+	margin-right: 15px;
+}
+
+#addcov_prices-table td:first-child { background-color: #607D8B; }
+#addcov_prices-table td:nth-child(2) { background-color: #2196F3; }
+#addcov_prices-table td:nth-child(3) { background-color: #f44336; }
+#addcov_prices-table td:nth-child(4) { background-color: #4CAF50; }
+
+#addcov_prices-table>tbody>tr:nth-of-type(odd) td:first-child { background-color: #546E7A; }
+#addcov_prices-table>tbody>tr:nth-of-type(odd) td:nth-child(2) { background-color: #1E88E5; }
+#addcov_prices-table>tbody>tr:nth-of-type(odd) td:nth-child(3) { background-color: #e53935; }
+#addcov_prices-table>tbody>tr:nth-of-type(odd) td:nth-child(4) { background-color: #43A047; }
+
+#addcov_prices-table thead td:first-child,
+#addcov_prices-table tfoot td:first-child { background-color: #263238; }
+#addcov_prices-table thead td:nth-child(2),
+#addcov_prices-table tfoot td:nth-child(2) {	background-color: #0D47A1; }
+#addcov_prices-table thead td:nth-child(3),
+#addcov_prices-table tfoot td:nth-child(3) {	background-color: #b71c1c; }
+#addcov_prices-table thead td:nth-child(4),
+#addcov_prices-table tfoot td:nth-child(4) {	background-color: #1B5E20; }
+
+.table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
+	border-color: #000;
+}
+
+#addcov_prices_buttons .btn-primary {
+	background-color: #fff;
+}
+#addcov_prices_buttons .btn-primary.active {
 	background-color: #607D8B;
 }
 

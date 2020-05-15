@@ -46,14 +46,13 @@ $genericSlide_vid = get_sub_field('genericSlide_vid');
             $params = array(
                 'controls'    => 0,
                 'rel'        => 0,
-                'autoplay'    => 1,
                 'loop'    => 1,
             );
             $new_src = add_query_arg($params, $src);
             $genericSlide_vid = str_replace($src, $new_src, $genericSlide_vid);
             
             // add extra attributes to iframe html
-            $attributes = 'frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>';
+            $attributes = 'frameborder="0" data-autoplay allowfullscreen>';
             
             $genericSlide_vid = str_replace('></iframe>', ' ' . $attributes . '></iframe>', $genericSlide_vid);
             

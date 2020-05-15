@@ -140,6 +140,10 @@
 						get_template_part('slides/slide_addcov');
 					}
 
+					if( $layout == 'slide_addcov_prices') {
+						get_template_part('slides/slide_addcov_prices');
+					}
+
 					if( $layout == 'slide_accfacts') {
 						get_template_part('slides/slide_accfacts');
 					}

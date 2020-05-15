@@ -103,9 +103,7 @@
 		
 		
 		//Discount tool on 'Additional Coverage Package' Slide 
-		var rowDiscount = $('#row-discount'),
-			rowTodaysPrice = $('#row-todaysprice'),
-			price_col1_beforeDiscount = $("#price_col1-beforeDiscount").text(),
+		var price_col1_beforeDiscount = $("#price_col1-beforeDiscount").text(),
 			price_col2_beforeDiscount = $("#price_col2-beforeDiscount").text(),
 			price_col3_beforeDiscount = $("#price_col3-beforeDiscount").text(),
 			price_col4_beforeDiscount = $("#price_col4-beforeDiscount").text(),
@@ -149,12 +147,7 @@
 		}
 		
 		function increaseDiscount(discAmt) {
-			var scope = {
-			    a: price_currentDiscount,
-			    b: discAmt
-			};
-			var scope2 = {};
-			price_currentDiscount = math.eval('a + b', scope); 
+			price_currentDiscount = price_currentDiscount + discAmt; 
 			$('#price_col1_discount,#price_col2_discount,#price_col3_discount,#price_col4_discount').text(price_currentDiscount);
 			
 			scope2 = {
@@ -164,10 +157,10 @@
 			    d: price_col3_beforeDiscount,
 			    e: price_col4_beforeDiscount
 			};
-			var pricecol1_todaysprice = math.eval('b - a', scope2).toFixed(2);
-			var pricecol2_todaysprice = math.eval('c - a', scope2).toFixed(2);
-			var pricecol3_todaysprice = math.eval('d - a', scope2).toFixed(2);
-			var pricecol4_todaysprice = math.eval('e - a', scope2).toFixed(2);
+			var pricecol1_todaysprice = price_col1_beforeDiscount - price_currentDiscount;
+			var pricecol2_todaysprice = price_col2_beforeDiscount - price_currentDiscount;
+			var pricecol3_todaysprice = price_col3_beforeDiscount - price_currentDiscount;
+			var pricecol4_todaysprice = price_col4_beforeDiscount - price_currentDiscount;
 			$('#price_col1_todaysprice').text(pricecol1_todaysprice);
 			$('#price_col2_todaysprice').text(pricecol2_todaysprice);
 			$('#price_col3_todaysprice').text(pricecol3_todaysprice);
@@ -198,6 +191,88 @@
 			$('#price_col2_todaysprice').text(pricecol2_todaysprice);
 			$('#price_col3_todaysprice').text(pricecol3_todaysprice);
 			$('#price_col4_todaysprice').text(pricecol4_todaysprice);
+		}
+
+
+
+		//Discount tool on 'Additional Coverage Package with prices 2020' Slide 
+		var totPrice_col1_beforeDiscount = $("#total_price_col1-beforeDiscount").text(),
+		totPrice_col2_beforeDiscount = $("#total_price_col2-beforeDiscount").text(),
+		totPrice_col3_beforeDiscount = $("#total_price_col3-beforeDiscount").text(),
+		totPrice_col4_beforeDiscount = $("#total_price_col4-beforeDiscount").text(),
+		totPrice_currentDiscount = 0;
+
+		function addcov_prices_visibilityCheck() {
+			if( $("#addcov_prices_buttons .btn.active")[0] ) {
+				if( !$("#addcov_prices_row-discount, #addcov_prices_row-todaysprice").hasClass('makeVisible') ) {
+					$("#addcov_prices_row-discount, #addcov_prices_row-todaysprice").addClass('makeVisible');
+				}
+			} else {
+				$("#addcov_prices_row-discount, #addcov_prices_row-todaysprice").removeClass('makeVisible');
+			}
+		}
+
+		$('#addcov_prices_buttons .btn').click(function() {
+			if( $( this ).hasClass('active') ) {
+				$( this ).removeClass('active');
+				addcov_prices_visibilityCheck();
+				if(addcov_prices_disc_single.length === 0){
+					addcov_prices_decreaseDiscount($( this ).data('discount'));
+				}
+				
+			} else {
+				$( this ).addClass('active');
+				addcov_prices_visibilityCheck();
+				if(addcov_prices_disc_single.length === 0){
+					addcov_prices_increaseDiscount($( this ).data('discount'));
+				}
+			}
+
+		});
+
+		if ( $( "#addcov_prices_additcoverage" ).length ) {
+			if(addcov_prices_disc_single.length > 0){
+				$('#total_price_col1_discount, #total_price_col2_discount, #total_price_col3_discount, #total_price_col4_discount').text(addcov_prices_disc_single);
+				$('#total_price_col1_todaysprice').text(totPrice_col1_beforeDiscount - addcov_prices_disc_single);
+				$('#total_price_col2_todaysprice').text(totPrice_col2_beforeDiscount - addcov_prices_disc_single);
+				$('#total_price_col3_todaysprice').text(totPrice_col3_beforeDiscount - addcov_prices_disc_single);
+				$('#total_price_col4_todaysprice').text(totPrice_col4_beforeDiscount - addcov_prices_disc_single);
+			}
+		}
+
+		function addcov_prices_increaseDiscount(discAmt) {
+		totPrice_currentDiscount = totPrice_currentDiscount + discAmt; 
+		$('#total_price_col1_discount,#total_price_col2_discount,#total_price_col3_discount,#total_price_col4_discount').text(totPrice_currentDiscount);
+
+		var totPricecol1_todaysprice = totPrice_col1_beforeDiscount - totPrice_currentDiscount;
+		var totPricecol2_todaysprice = totPrice_col2_beforeDiscount - totPrice_currentDiscount;
+		var totPricecol3_todaysprice = totPrice_col3_beforeDiscount - totPrice_currentDiscount;
+		var totPricecol4_todaysprice = totPrice_col4_beforeDiscount - totPrice_currentDiscount;
+		$('#total_price_col1_todaysprice').text(totPricecol1_todaysprice);
+		$('#total_price_col2_todaysprice').text(totPricecol2_todaysprice);
+		$('#total_price_col3_todaysprice').text(totPricecol3_todaysprice);
+		$('#total_price_col4_todaysprice').text(totPricecol4_todaysprice);
+		}
+
+		function addcov_prices_decreaseDiscount(discAmt) {
+		totPrice_currentDiscount = totPrice_currentDiscount - discAmt; 
+		$('#total_price_col1_discount,#total_price_col2_discount,#total_price_col3_discount,#total_price_col4_discount').text(totPrice_currentDiscount);
+
+		scope2 = {
+				a: totPrice_currentDiscount,
+				b: totPrice_col1_beforeDiscount,
+				c: totPrice_col2_beforeDiscount,
+				d: totPrice_col3_beforeDiscount,
+				e: totPrice_col4_beforeDiscount
+		};
+		var totPricecol1_todaysprice = totPrice_col1_beforeDiscount - totPrice_currentDiscount;
+		var totPricecol2_todaysprice = totPrice_col2_beforeDiscount - totPrice_currentDiscount;
+		var totPricecol3_todaysprice = totPrice_col3_beforeDiscount - totPrice_currentDiscount;
+		var totPricecol4_todaysprice = totPrice_col4_beforeDiscount - totPrice_currentDiscount;
+		$('#totPrice_col1_todaysprice').text(totPricecol1_todaysprice);
+		$('#totPrice_col2_todaysprice').text(totPricecol2_todaysprice);
+		$('#totPrice_col3_todaysprice').text(totPricecol3_todaysprice);
+		$('#totPrice_col4_todaysprice').text(totPricecol4_todaysprice);
 		}
 			
 

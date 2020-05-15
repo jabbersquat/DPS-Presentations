@@ -16,7 +16,7 @@
     </div>
     <div id="sound-videoembed" class="col-xs-6">
       <div class="embed-inner">
-        <iframe src="https://www.youtube.com/embed/G1y-futmeZ8?rel=0&amp;controls=0&autoplay=1&loop=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/G1y-futmeZ8?rel=0&amp;controls=0&loop=1" frameborder="0" data-autoplay allowfullscreen></iframe>
       </div>
     </div>
   </div>

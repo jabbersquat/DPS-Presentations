@@ -1,7 +1,7 @@
 <?php 
 //
 //
-// Additional Coverage Package
+// Additional Coverage Packages
 //
 ?>
   
@@ -199,7 +199,7 @@
       if( $discountChoosen && in_array('costcosams', $discountChoosen) ) { ?>
       <button id="discount-costcosams" type="button" class="btn btn-primary" data-discount="<?php echo $costcosams ?>">
         <span>
-        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
             width="250px" height="50px" viewBox="0 0 250 50" style="enable-background:new 0 0 250 50;" xml:space="preserve">
         <style type="text/css">
           .costco0{fill:#FFFFFF;}
@@ -249,7 +249,7 @@
       if( $discountChoosen && in_array('aarp', $discountChoosen) ) { ?>
       <button id="discount-aarp" type="button" class="btn btn-primary" data-discount="<?php echo $aarp ?>">
         <span>
-          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
               width="150px" height="50px" viewBox="0 0 150 50" style="enable-background:new 0 0 150 50;" xml:space="preserve">
           <style type="text/css">
             .aarp0{fill:#EE2722;}
@@ -264,7 +264,7 @@
       if( $discountChoosen && in_array('aaa', $discountChoosen) ) { ?>
       <button id="discount-aaa" type="button" class="btn btn-primary" data-discount="<?php echo $aaa ?>">
         <span>
-          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
               width="80px" height="50px" viewBox="0 0 80 50" style="enable-background:new 0 0 80 50;" xml:space="preserve">
           <style type="text/css">
             .aaa0{fill:#FD000D;}
@@ -277,7 +277,7 @@
       if( $discountChoosen && in_array('firstresponder', $discountChoosen) ) { ?>
       <button id="discount-firstresponder" type="button" class="btn btn-primary" data-discount="<?php echo $firstresponder ?>">
         <span>
-        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="140px" height="50px" viewBox="0 0 140 50" xml:space="preserve">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="140px" height="50px" viewBox="0 0 140 50" xml:space="preserve">
         <path fill="#FFFFFF" d="M111.8,4.2C100.3,4.2,91,13.5,91,25s9.4,20.8,20.8,20.8s20.8-9.4,20.8-20.8S123.3,4.2,111.8,4.2z"/>
         <path fill="#FFFFFF" d="M46.7,18c-1-2.1-1.6-4.3-2.4-6.6c-3.1,2.5-6.2,5.1-9.2,7.7l-0.8-0.8c2.5-3,5.2-6.1,7.7-9.2c-2.3-0.8-4.5-1.3-6.6-2.3c-2-0.9-3.6-2.4-6.2-2.7h-1.1c-2.5,0.2-4.7,1.5-6.7,2.5c-2.1,1-4.3,1.6-6.6,2.5c2.6,3.1,5.1,6.2,7.8,9.2l-0.9,0.8c-3-2.6-6.1-5.2-9.2-7.7C11.7,13.8,11,16,10.1,18c-0.9,2-2.3,3.7-2.7,6.3v1.1c0.3,2.7,1.5,4.6,2.5,6.7c1,2.1,1.8,4.3,2.6,6.6c3.1-2.6,6.2-5.1,9.2-7.8l0.9,0.6c-2.7,3-5.2,6.1-7.8,9.2c2.3,0.9,4.5,1.6,6.6,2.6c2.1,1,4,2.3,6.7,2.5h1.2c2.5-0.3,4.2-1.7,6.2-2.7c2.1-1,4.3-1.5,6.6-2.3c-2.6-3.1-5.2-6.2-7.8-9.2l0.8-0.9c3,2.7,6.1,5.3,9.2,7.8c0.9-2.3,1.6-4.5,2.6-6.6c1-2,2.3-4,2.5-6.7v-1C49,21.8,47.7,20,46.7,18z"/>
         <path fill="#FFFFFF" d="M88,19.5c-0.1-1.1-0.2-2.3-0.4-3.3c-0.1-0.5-0.2-1-0.4-1.5s-0.3-0.9-0.5-1.4s-0.3-0.9-0.4-1.2c-0.1-0.2-0.2-0.5-0.2-0.7c-0.3-0.9-0.6-1.7-0.9-2.5c-0.4-0.8-0.8-1.5-1.3-2.2c-1-1.4-2-2.6-3.3-3.7c-0.6-0.5-1.3-1.1-2.1-1.4c-0.4-0.2-0.9-0.3-1.4-0.4c-0.5-0.1-1-0.1-1.5-0.1s-1,0.1-1.6,0.2c-0.2,0-0.5,0.1-0.7,0.2s-0.5,0.1-0.6,0.2c-0.1,0.1-0.1,0.1-0.3,0.2c-0.2,0-0.4-0.1-0.5-0.1c-0.2,0-0.3-0.1-0.5-0.1c-0.9-0.1-1.9,0-2.7,0.3c-0.2,0.1-0.3,0.1-0.5,0.2c-1-0.7-2.4-1.3-4-1c-0.7,0.1-1.4,0.3-2,0.6S61,2.4,60.5,2.7c-0.5,0.4-1,0.8-1.4,1.2c-0.4,0.4-0.9,0.9-1.3,1.4c-0.4,0.5-0.8,1-1.1,1.5c-0.7,1-1.3,2.2-1.9,3.4c-0.5,1.2-1.1,2.4-1.5,3.7c-0.1,0.3-0.2,0.7-0.3,1c-0.1,0.3-0.2,0.7-0.3,1c-0.1,0.3-0.2,0.7-0.2,1.1c-0.1,0.4-0.2,0.7-0.2,1.1c-0.1,0.8-0.1,1.5-0.2,2.3v1.2c0,0.3,0,0.7,0.1,1.1c0.1,1.2,0.3,2.3,0.6,3.3c0.2,1.1,0.5,2.1,0.8,3.1c0.2,0.7,0.4,1.4,0.6,2c0.1,0.3,0.3,0.6,0.4,0.9c0.7,1.5,1.4,3,2.2,4.4c0.3,0.6,0.7,1.1,1,1.6s0.7,1.1,1,1.6s0.7,1,1.1,1.5c0.4,0.5,0.8,1,1.2,1.4c0.6,0.7,1.2,1.4,1.9,2.1c0.2,0.2,0.4,0.4,0.7,0.6c1.4,1.2,3.1,2.2,4.8,3c0.4,0.2,0.9,0.4,1.4,0.6c0.2,0.1,0.3,0.1,0.5,0.1c0.6-0.2,1.2-0.4,1.8-0.7c0.6-0.3,1.1-0.6,1.6-0.9c1-0.6,2-1.3,2.9-2.2c0.9-0.8,1.7-1.6,2.5-2.5c0.6-0.6,1.3-1.6,2-2.6c0.3-0.5,0.7-1,1-1.5s0.6-1.1,0.9-1.6c0.3-0.5,0.6-1.1,0.9-1.6s0.6-1.1,0.9-1.7c0.1-0.3,0.3-0.6,0.4-0.8c0.1-0.3,0.3-0.6,0.4-0.8c0.5-1.2,0.9-2.5,1.2-3.8c0.1-0.3,0.2-0.7,0.3-1s0.2-0.6,0.2-1c0.3-1.6,0.6-3.1,0.7-4.8C88.1,20.8,88.1,20.2,88,19.5z"/>
