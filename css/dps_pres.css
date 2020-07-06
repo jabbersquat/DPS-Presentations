@@ -1144,9 +1144,29 @@ table-reg:last-child > div {
 
 #addcov_prices_buttons .btn-primary {
 	background-color: #fff;
+	color: #000;
+	line-height: 1rem;
+	padding-left: 6px;
+	padding-right: 6px;
 }
 #addcov_prices_buttons .btn-primary.active {
 	background-color: #607D8B;
+}
+#discount-custom.btn-primary {
+	font-size: 2rem;
+	line-height: 50px;
+}
+#discount-custom.btn-primary.active {
+	color: #fff;
+}
+.btn-primary.active .hidden-on-active {
+	visibility: hidden;
+}
+.btn-primary.active .dark-on-active {
+	fill: #263238;
+}
+.btn-primary.active .white-on-active {
+	fill: #263238;
 }
 
 /*

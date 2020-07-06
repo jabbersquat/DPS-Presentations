@@ -54,7 +54,9 @@
         
         
         while ( have_rows('addcov_coverages') ) : the_row();
-    
+
+          $fmt = numfmt_create( 'en_US', NumberFormatter::CURRENCY );
+          $fmt->setAttribute(NumberFormatter::FRACTION_DIGITS, 2);
           $coverage = get_sub_field('addcov_prices_coverage_name');
           $coverage_price_col1 = get_sub_field('addcov_prices_coverage_col1');
           $coverage_price_col2 = get_sub_field('addcov_prices_coverage_col2');
@@ -69,20 +71,22 @@
             $n = 0;
             foreach ($coverageColumns as $cov) {
               if($coverageColumns[$n]) : 
-                $n += 1; ?>
-                <td style="width: <?php echo $width_colOther; ?>%;text-align:center;">
-                  <?php 
-                    $colNum = "col".$n; 
-                    $priceColNum = 'total_price_col'.$n; 
-                    $colPrice = 'coverage_price_col'.$n;
-                    if( is_numeric( $$colPrice ) ) {
-                      echo $$colPrice; 
-                      $$priceColNum += $$colPrice;
-                    } else {
-                      echo '-';
-                    }
-                    
-                  ?>
+                $n += 1; 
+                $colNum = 'col'.$n; 
+                $priceColNum = 'total_price_col'.$n; 
+                $colPrice = 'coverage_price_col'.$n;
+
+                if( is_numeric( $$colPrice ) ) {
+                  $colPriceText = numfmt_format_currency($fmt, $$colPrice, 'USD');
+                  $$priceColNum += $$colPrice;
+                } else {
+                  $colPriceText = '-';
+                }
+                ?>
+                <td 
+                  style="width: <?php echo $width_colOther; ?>%;text-align:center;" 
+                  data-price="<?php echo $colPrice; ?>">
+                  <?php echo $colPriceText; ?>
                 </td>
               <?php endif; ?>
             <?php } ?>
@@ -105,8 +109,17 @@
           foreach ($coverageColumns as $cov) {
             if($coverageColumns[$n2]) : 
               $n2 += 1;
-              $priceColNum2 = 'total_price_col'.$n2; ?>
-              <td style="width: <?php echo $width_colOther; ?>%;">$<span id="total_price_col<?php echo $n2; ?>-beforeDiscount"><?php echo $$priceColNum2; ?></span></td>
+              $priceColNum2 = 'total_price_col'.$n2; 
+              $priceColNum2Number = $$priceColNum2;
+              $priceColNum2Text = numfmt_format_currency($fmt, $priceColNum2Number, 'USD');
+              ?>
+              <td style="width: <?php echo $width_colOther; ?>%;">
+                <span 
+                  id="total_price_col<?php echo $n2; ?>-beforeDiscount" 
+                  data-price="<?php echo $priceColNum2Number ?>">
+                  <?php echo $priceColNum2Text; ?>
+                </span>
+              </td>
             <?php endif; 
           } ?>
         </tr>
@@ -134,7 +147,7 @@
     foreach ($coverageColumns as $cov) {
       if($coverageColumns[$n3]) : 
         $n3 += 1; ?>
-        <div style="width: <?php echo $width_colOther; ?>%;text-align:center;">$<span id="total_price_col<?php echo $n3; ?>_discount"></span></div>
+        <div style="width: <?php echo $width_colOther; ?>%;text-align:center;"><span id="total_price_col<?php echo $n3; ?>_discount"></span></div>
       <?php endif; 
     } ?>
   </div>
@@ -144,7 +157,7 @@
     foreach ($coverageColumns as $cov) {
       if($coverageColumns[$n4]) : 
         $n4 += 1; ?>
-        <div style="width: <?php echo $width_colOther; ?>%;text-align:center;">$<span id="total_price_col<?php echo $n4; ?>_todaysprice"></span></div>
+        <div style="width: <?php echo $width_colOther; ?>%;text-align:center;"><span id="total_price_col<?php echo $n4; ?>_todaysprice"></span></div>
       <?php endif; 
     } ?>
   </div>
@@ -161,39 +174,28 @@
     ?>
   
 
-    <button id="discount-<?php echo $discountSlug['value'] ?>" type="button" class="btn btn-primary" data-discount="<?php echo $discountAmount ?>">
-      <?php
+    <button id="discount-<?php echo $discountSlug['value'] ?>" type="button" class="btn btn-primary" data-discount="<?php echo $discountAmount ?>"><?php
         if ($discountSlug['value'] === 'custom') {
           echo $discountCustom;
         } elseif($discountSlug['value'] === 'veterans') { 
-          echo '<span>';
           get_template_part('slides/svg/veterans');
           echo '</span>';
 
         } elseif($discountSlug['value'] === 'costcosams') { 
-          echo '<span>';
           get_template_part('slides/svg/costcosams');
           echo '</span>';
 
         } elseif($discountSlug['value'] === 'aarp') { 
-          echo '<span>';
           get_template_part('slides/svg/aarp');
           echo '</span>';
 
         } elseif($discountSlug['value'] === 'aaa') { 
-          echo '<span>';
           get_template_part('slides/svg/aaa');
           echo '</span>';
 
-        } elseif($discountSlug['value'] === 'firstresponders') { 
-          echo '<span>';
+        } elseif($discountSlug['value'] === 'firstresponder') { 
           get_template_part('slides/svg/firstresponders');
-          echo '</span>';
-
-        } ?>
-      
-      
-    </button>
+        } ?></button>
 
   <?php	
       

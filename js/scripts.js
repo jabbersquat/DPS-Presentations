@@ -196,11 +196,32 @@
 
 
 		//Discount tool on 'Additional Coverage Package with prices 2020' Slide 
-		var totPrice_col1_beforeDiscount = $("#total_price_col1-beforeDiscount").text(),
-		totPrice_col2_beforeDiscount = $("#total_price_col2-beforeDiscount").text(),
-		totPrice_col3_beforeDiscount = $("#total_price_col3-beforeDiscount").text(),
-		totPrice_col4_beforeDiscount = $("#total_price_col4-beforeDiscount").text(),
-		totPrice_currentDiscount = 0;
+		// Dinero();
+		Dinero.globalLocale = 'en-EN';
+		Dinero.globalFormat = '$0,0.00';
+
+		var beforeDiscounts = [];
+
+		function getDiscount(name) {
+			if($("#" + name).length !== 0) {
+				var element = $("#" + name).data('price');
+				var removeDecimal = 100 * element.toFixed(2);
+				var dineroAmount = Dinero({ amount: removeDecimal, currency: 'USD' });
+				return dineroAmount;
+			} else {
+				return false;
+			}
+		}
+
+		beforeDiscounts = [
+			getDiscount('total_price_col1-beforeDiscount'),
+			getDiscount('total_price_col2-beforeDiscount'),
+			getDiscount('total_price_col3-beforeDiscount'),
+			getDiscount('total_price_col4-beforeDiscount'),
+		];
+
+		console.log(beforeDiscounts);
+		var totPrice_currentDiscount = 0;
 
 		function addcov_prices_visibilityCheck() {
 			if( $("#addcov_prices_buttons .btn.active")[0] ) {
@@ -217,14 +238,14 @@
 				$( this ).removeClass('active');
 				addcov_prices_visibilityCheck();
 				if(addcov_prices_disc_single.length === 0){
-					addcov_prices_decreaseDiscount($( this ).data('discount'));
+					addcov_prices_changeDiscount($( this ).data('discount'));
 				}
 				
 			} else {
 				$( this ).addClass('active');
 				addcov_prices_visibilityCheck();
 				if(addcov_prices_disc_single.length === 0){
-					addcov_prices_increaseDiscount($( this ).data('discount'));
+					addcov_prices_changeDiscount($( this ).data('discount'));
 				}
 			}
 
@@ -233,46 +254,41 @@
 		if ( $( "#addcov_prices_additcoverage" ).length ) {
 			if(addcov_prices_disc_single.length > 0){
 				$('#total_price_col1_discount, #total_price_col2_discount, #total_price_col3_discount, #total_price_col4_discount').text(addcov_prices_disc_single);
-				$('#total_price_col1_todaysprice').text(totPrice_col1_beforeDiscount - addcov_prices_disc_single);
-				$('#total_price_col2_todaysprice').text(totPrice_col2_beforeDiscount - addcov_prices_disc_single);
-				$('#total_price_col3_todaysprice').text(totPrice_col3_beforeDiscount - addcov_prices_disc_single);
-				$('#total_price_col4_todaysprice').text(totPrice_col4_beforeDiscount - addcov_prices_disc_single);
+				$('#total_price_col1_todaysprice').text(totPrice_col1_beforeDiscountDinero - addcov_prices_disc_single);
+				$('#total_price_col2_todaysprice').text(totPrice_col2_beforeDiscountDinero - addcov_prices_disc_single);
+				$('#total_price_col3_todaysprice').text(totPrice_col3_beforeDiscountDinero - addcov_prices_disc_single);
+				$('#total_price_col4_todaysprice').text(totPrice_col4_beforeDiscountDinero - addcov_prices_disc_single);
 			}
 		}
 
-		function addcov_prices_increaseDiscount(discAmt) {
-		totPrice_currentDiscount = totPrice_currentDiscount + discAmt; 
-		$('#total_price_col1_discount,#total_price_col2_discount,#total_price_col3_discount,#total_price_col4_discount').text(totPrice_currentDiscount);
+		function addcov_prices_changeDiscount(discAmt) {
+			
 
-		var totPricecol1_todaysprice = totPrice_col1_beforeDiscount - totPrice_currentDiscount;
-		var totPricecol2_todaysprice = totPrice_col2_beforeDiscount - totPrice_currentDiscount;
-		var totPricecol3_todaysprice = totPrice_col3_beforeDiscount - totPrice_currentDiscount;
-		var totPricecol4_todaysprice = totPrice_col4_beforeDiscount - totPrice_currentDiscount;
-		$('#total_price_col1_todaysprice').text(totPricecol1_todaysprice);
-		$('#total_price_col2_todaysprice').text(totPricecol2_todaysprice);
-		$('#total_price_col3_todaysprice').text(totPricecol3_todaysprice);
-		$('#total_price_col4_todaysprice').text(totPricecol4_todaysprice);
-		}
+			var discountsActive = $('.btn.btn-primary.active').map(function() {
+				return $(this).data('discount');
+			}).toArray();
 
-		function addcov_prices_decreaseDiscount(discAmt) {
-		totPrice_currentDiscount = totPrice_currentDiscount - discAmt; 
-		$('#total_price_col1_discount,#total_price_col2_discount,#total_price_col3_discount,#total_price_col4_discount').text(totPrice_currentDiscount);
+			var discountsActiveNew = $.map( discountsActive, function( value ) {
+				var newValue = Math.round(100 * value.toFixed(2));
+				return newValue;
+			});
 
-		scope2 = {
-				a: totPrice_currentDiscount,
-				b: totPrice_col1_beforeDiscount,
-				c: totPrice_col2_beforeDiscount,
-				d: totPrice_col3_beforeDiscount,
-				e: totPrice_col4_beforeDiscount
-		};
-		var totPricecol1_todaysprice = totPrice_col1_beforeDiscount - totPrice_currentDiscount;
-		var totPricecol2_todaysprice = totPrice_col2_beforeDiscount - totPrice_currentDiscount;
-		var totPricecol3_todaysprice = totPrice_col3_beforeDiscount - totPrice_currentDiscount;
-		var totPricecol4_todaysprice = totPrice_col4_beforeDiscount - totPrice_currentDiscount;
-		$('#totPrice_col1_todaysprice').text(totPricecol1_todaysprice);
-		$('#totPrice_col2_todaysprice').text(totPricecol2_todaysprice);
-		$('#totPrice_col3_todaysprice').text(totPricecol3_todaysprice);
-		$('#totPrice_col4_todaysprice').text(totPricecol4_todaysprice);
+			var discountReducer = function(a, b) {
+				return a + b;
+			}
+
+			var discountTotal = discountsActiveNew.reduce(discountReducer, 0);
+			console.log("total " + discountTotal);
+			
+			console.log(discountsActive);
+			$('#total_price_col1_discount,#total_price_col2_discount,#total_price_col3_discount,#total_price_col4_discount').text( Dinero({amount: discountTotal}).toFormat() );
+
+			$.each(beforeDiscounts, function(index,value){
+				if(value) {
+					var totPrice_todaysprice = value.subtract(Dinero({ amount: discountTotal, currency: 'USD' }));
+					$('#total_price_col'+(index+1)+'_todaysprice').text(totPrice_todaysprice.toFormat());
+				}
+			})
 		}
 			
 
