@@ -31,8 +31,8 @@
           $width_col1 = 66.7777777777;
           $width_colOther = 33.333333333;
         }
-        
       ?>
+
       <!-- Row Header -->
       <thead>
         <tr>
@@ -40,12 +40,10 @@
           <?php foreach ($coverageColumns as $cov) {
             echo '<td style="width: '.$width_colOther.'%;">'.$cov['addcov_prices_column_name'].'</td>';
           } ?>
-        
         </tr>
       </thead>
       
-      <?php
-        
+      <?php 
       if( have_rows('addcov_coverages') ):
         $total_price_col1 = 0;
         $total_price_col2 = 0;
@@ -88,6 +86,7 @@
                   data-price="<?php echo $colPrice; ?>">
                   <?php echo $colPriceText; ?>
                 </td>
+                
               <?php endif; ?>
             <?php } ?>
         </tr>
@@ -179,27 +178,21 @@
           echo $discountCustom;
         } elseif($discountSlug['value'] === 'veterans') { 
           get_template_part('slides/svg/veterans');
-          echo '</span>';
 
         } elseif($discountSlug['value'] === 'costcosams') { 
           get_template_part('slides/svg/costcosams');
-          echo '</span>';
 
         } elseif($discountSlug['value'] === 'aarp') { 
           get_template_part('slides/svg/aarp');
-          echo '</span>';
 
         } elseif($discountSlug['value'] === 'aaa') { 
           get_template_part('slides/svg/aaa');
-          echo '</span>';
 
         } elseif($discountSlug['value'] === 'firstresponder') { 
           get_template_part('slides/svg/firstresponders');
         } ?></button>
 
-  <?php	
-      
-  endwhile; ?>
+    <?php endwhile; ?>
 
   </div>
 

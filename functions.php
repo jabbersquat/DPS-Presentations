@@ -107,10 +107,8 @@ function html5blank_header_scripts()
 function html5blank_conditional_scripts()
 {
     if ( is_single() ) {
-        wp_register_script('mathjs', get_template_directory_uri() . '/js/lib/math.min.js', array(), '3.20.2', true); // Conditional script(s)
-        wp_enqueue_script('mathjs'); // Enqueue it!
 
-        wp_register_script('dinerojs', get_template_directory_uri() . '/js/lib/dinero.min.js', array(), '1.8.1');
+        wp_register_script('dinerojs', get_template_directory_uri() . '/js/lib/dinero.polyfilled.js', array(), '1.8.1');
         wp_enqueue_script('dinerojs'); // Enqueue it!
     }
 }

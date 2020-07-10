@@ -103,11 +103,29 @@
 		
 		
 		//Discount tool on 'Additional Coverage Package' Slide 
-		var price_col1_beforeDiscount = $("#price_col1-beforeDiscount").text(),
-			price_col2_beforeDiscount = $("#price_col2-beforeDiscount").text(),
-			price_col3_beforeDiscount = $("#price_col3-beforeDiscount").text(),
-			price_col4_beforeDiscount = $("#price_col4-beforeDiscount").text(),
-			price_currentDiscount = 0;
+		Dinero();
+		Dinero.globalLocale = 'en-EN';
+		Dinero.globalFormat = '$0,0.00';
+
+		function getDiscount(name) {
+			if($("#" + name).length !== 0) {
+				var element = $("#" + name).data('price');
+				var removeDecimal = 100 * element.toFixed(2);
+				var dineroAmount = Dinero({ amount: removeDecimal, currency: 'USD' });
+				return dineroAmount;
+			} else {
+				return false;
+			}
+		}
+
+		var beforeDiscounts = [];
+
+		beforeDiscounts = [
+			getDiscount('price_col1-beforeDiscount'),
+			getDiscount('price_col2-beforeDiscount'),
+			getDiscount('price_col3-beforeDiscount'),
+			getDiscount('price_col4-beforeDiscount'),
+		];
 			
 		function visibilityCheck() {
 			if( $("#addcov-buttons .btn.active")[0] ) {
@@ -123,13 +141,13 @@
 			if( $( this ).hasClass('active') ) {
 				$( this ).removeClass('active');
 				if(disc_single.length === 0){
-					decreaseDiscount($( this ).data('discount'));
+					changeDiscount($( this ).data('discount'));
 				}
 				visibilityCheck();
 			} else {
 				$( this ).addClass('active');
 				if(disc_single.length === 0){
-					increaseDiscount($( this ).data('discount'));
+					changeDiscount($( this ).data('discount'));
 				}
 				visibilityCheck();
 			}
@@ -146,82 +164,45 @@
 			}
 		}
 		
-		function increaseDiscount(discAmt) {
-			price_currentDiscount = price_currentDiscount + discAmt; 
-			$('#price_col1_discount,#price_col2_discount,#price_col3_discount,#price_col4_discount').text(price_currentDiscount);
-			
-			scope2 = {
-			    a: price_currentDiscount,
-			    b: price_col1_beforeDiscount,
-			    c: price_col2_beforeDiscount,
-			    d: price_col3_beforeDiscount,
-			    e: price_col4_beforeDiscount
-			};
-			var pricecol1_todaysprice = price_col1_beforeDiscount - price_currentDiscount;
-			var pricecol2_todaysprice = price_col2_beforeDiscount - price_currentDiscount;
-			var pricecol3_todaysprice = price_col3_beforeDiscount - price_currentDiscount;
-			var pricecol4_todaysprice = price_col4_beforeDiscount - price_currentDiscount;
-			$('#price_col1_todaysprice').text(pricecol1_todaysprice);
-			$('#price_col2_todaysprice').text(pricecol2_todaysprice);
-			$('#price_col3_todaysprice').text(pricecol3_todaysprice);
-			$('#price_col4_todaysprice').text(pricecol4_todaysprice);
-		}
 		
-		function decreaseDiscount(discAmt) {
-			var scope = {
-			    a: price_currentDiscount,
-			    b: discAmt
-			};
-			var scope2 = {};
-			price_currentDiscount = math.eval('a - b', scope); 
-			$('#price_col1_discount,#price_col2_discount,#price_col3_discount,#price_col4_discount').text(price_currentDiscount);
+		function changeDiscount() {
+			var discountsActive = $('.btn.btn-primary.active').map(function() {
+				return $(this).data('discount');
+			}).toArray();
+
+			var discountsActiveNew = $.map( discountsActive, function( value ) {
+				var newValue = Math.round(100 * value.toFixed(2));
+				return newValue;
+			});
+
+			var discountReducer = function(a, b) {
+				return a + b;
+			}
+
+			var discountTotal = discountsActiveNew.reduce(discountReducer, 0);
+ 
+			$('#price_col1_discount,#price_col2_discount,#price_col3_discount,#price_col4_discount').text( Dinero({amount: discountTotal}).toFormat() );
 			
-			scope2 = {
-			    a: price_currentDiscount,
-			    b: price_col1_beforeDiscount,
-			    c: price_col2_beforeDiscount,
-			    d: price_col3_beforeDiscount,
-			    e: price_col4_beforeDiscount
-			};
-			var pricecol1_todaysprice = math.eval('b - a', scope2).toFixed(2);
-			var pricecol2_todaysprice = math.eval('c - a', scope2).toFixed(2);
-			var pricecol3_todaysprice = math.eval('d - a', scope2).toFixed(2);
-			var pricecol4_todaysprice = math.eval('e - a', scope2).toFixed(2);
-			$('#price_col1_todaysprice').text(pricecol1_todaysprice);
-			$('#price_col2_todaysprice').text(pricecol2_todaysprice);
-			$('#price_col3_todaysprice').text(pricecol3_todaysprice);
-			$('#price_col4_todaysprice').text(pricecol4_todaysprice);
+			$.each(beforeDiscounts, function(index,value){
+				if(value) {
+					var totPrice_todaysprice = value.subtract(Dinero({ amount: discountTotal, currency: 'USD' }));
+					$('#price_col'+(index+1)+'_todaysprice').text(totPrice_todaysprice.toFormat());
+				}
+			})
 		}
 
 
 
 		//Discount tool on 'Additional Coverage Package with prices 2020' Slide 
-		// Dinero();
-		Dinero.globalLocale = 'en-EN';
-		Dinero.globalFormat = '$0,0.00';
+		var beforeDiscounts_prices = [];
 
-		var beforeDiscounts = [];
-
-		function getDiscount(name) {
-			if($("#" + name).length !== 0) {
-				var element = $("#" + name).data('price');
-				var removeDecimal = 100 * element.toFixed(2);
-				var dineroAmount = Dinero({ amount: removeDecimal, currency: 'USD' });
-				return dineroAmount;
-			} else {
-				return false;
-			}
-		}
-
-		beforeDiscounts = [
+		beforeDiscounts_prices = [
 			getDiscount('total_price_col1-beforeDiscount'),
 			getDiscount('total_price_col2-beforeDiscount'),
 			getDiscount('total_price_col3-beforeDiscount'),
 			getDiscount('total_price_col4-beforeDiscount'),
 		];
 
-		console.log(beforeDiscounts);
-		var totPrice_currentDiscount = 0;
 
 		function addcov_prices_visibilityCheck() {
 			if( $("#addcov_prices_buttons .btn.active")[0] ) {
@@ -261,14 +242,14 @@
 			}
 		}
 
-		function addcov_prices_changeDiscount(discAmt) {
+		function addcov_prices_changeDiscount() {
 			
 
-			var discountsActive = $('.btn.btn-primary.active').map(function() {
+			var discountsActive_Prices = $('.btn.btn-primary.active').map(function() {
 				return $(this).data('discount');
 			}).toArray();
 
-			var discountsActiveNew = $.map( discountsActive, function( value ) {
+			var discountsActive_PricesNew = $.map( discountsActive_Prices, function( value ) {
 				var newValue = Math.round(100 * value.toFixed(2));
 				return newValue;
 			});
@@ -277,13 +258,13 @@
 				return a + b;
 			}
 
-			var discountTotal = discountsActiveNew.reduce(discountReducer, 0);
-			console.log("total " + discountTotal);
+			var discountTotal = discountsActive_PricesNew.reduce(discountReducer, 0);
+			// console.log("total " + discountTotal);
 			
-			console.log(discountsActive);
+			// console.log(discountsActive);
 			$('#total_price_col1_discount,#total_price_col2_discount,#total_price_col3_discount,#total_price_col4_discount').text( Dinero({amount: discountTotal}).toFormat() );
 
-			$.each(beforeDiscounts, function(index,value){
+			$.each(beforeDiscounts_prices, function(index,value){
 				if(value) {
 					var totPrice_todaysprice = value.subtract(Dinero({ amount: discountTotal, currency: 'USD' }));
 					$('#total_price_col'+(index+1)+'_todaysprice').text(totPrice_todaysprice.toFormat());

@@ -1050,19 +1050,23 @@ table-reg:last-child > div {
 }
 
 #addcov-table td:first-child { background-color: #607D8B; }
-#addcov-table td:nth-child(2) { background-color: #2196F3; }
+#addcov-table td:nth-child(2),
+#addcov-table td:nth-child(5) { background-color: #2196F3; }
 #addcov-table td:nth-child(3) { background-color: #f44336; }
 #addcov-table td:nth-child(4) { background-color: #4CAF50; }
 
 #addcov-table>tbody>tr:nth-of-type(odd) td:first-child { background-color: #546E7A; }
-#addcov-table>tbody>tr:nth-of-type(odd) td:nth-child(2) { background-color: #1E88E5; }
+#addcov-table>tbody>tr:nth-of-type(odd) td:nth-child(2),
+#addcov-table>tbody>tr:nth-of-type(odd) td:nth-child(5) { background-color: #1E88E5; }
 #addcov-table>tbody>tr:nth-of-type(odd) td:nth-child(3) { background-color: #e53935; }
 #addcov-table>tbody>tr:nth-of-type(odd) td:nth-child(4) { background-color: #43A047; }
 
 #addcov-table thead td:first-child,
 #addcov-table tfoot td:first-child { background-color: #263238; }
 #addcov-table thead td:nth-child(2),
-#addcov-table tfoot td:nth-child(2) {	background-color: #0D47A1; }
+#addcov-table tfoot td:nth-child(2),
+#addcov-table thead td:nth-child(5),
+#addcov-table tfoot td:nth-child(5) {	background-color: #0D47A1; }
 #addcov-table thead td:nth-child(3),
 #addcov-table tfoot td:nth-child(3) {	background-color: #b71c1c; }
 #addcov-table thead td:nth-child(4),
@@ -1120,19 +1124,23 @@ table-reg:last-child > div {
 }
 
 #addcov_prices-table td:first-child { background-color: #607D8B; }
-#addcov_prices-table td:nth-child(2) { background-color: #2196F3; }
+#addcov_prices-table td:nth-child(2),
+#addcov_prices-table td:nth-child(5) { background-color: #2196F3; }
 #addcov_prices-table td:nth-child(3) { background-color: #f44336; }
 #addcov_prices-table td:nth-child(4) { background-color: #4CAF50; }
 
 #addcov_prices-table>tbody>tr:nth-of-type(odd) td:first-child { background-color: #546E7A; }
-#addcov_prices-table>tbody>tr:nth-of-type(odd) td:nth-child(2) { background-color: #1E88E5; }
+#addcov_prices-table>tbody>tr:nth-of-type(odd) td:nth-child(2),
+#addcov_prices-table>tbody>tr:nth-of-type(odd) td:nth-child(5) { background-color: #1E88E5; }
 #addcov_prices-table>tbody>tr:nth-of-type(odd) td:nth-child(3) { background-color: #e53935; }
 #addcov_prices-table>tbody>tr:nth-of-type(odd) td:nth-child(4) { background-color: #43A047; }
 
 #addcov_prices-table thead td:first-child,
 #addcov_prices-table tfoot td:first-child { background-color: #263238; }
 #addcov_prices-table thead td:nth-child(2),
-#addcov_prices-table tfoot td:nth-child(2) {	background-color: #0D47A1; }
+#addcov_prices-table tfoot td:nth-child(2),
+#addcov_prices-table thead td:nth-child(5),
+#addcov_prices-table tfoot td:nth-child(5) {	background-color: #0D47A1; }
 #addcov_prices-table thead td:nth-child(3),
 #addcov_prices-table tfoot td:nth-child(3) {	background-color: #b71c1c; }
 #addcov_prices-table thead td:nth-child(4),
