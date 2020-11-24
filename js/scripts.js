@@ -107,10 +107,16 @@
 		Dinero.globalLocale = 'en-EN';
 		Dinero.globalFormat = '$0,0.00';
 
+		if( $('#addcov-table').hasClass('discount-cumulative')) {
+			var isSingleDiscount = false;
+		} else {
+			var isSingleDiscount = true;
+		}
+
 		function getDiscount(name) {
 			if($("#" + name).length !== 0) {
 				var element = $("#" + name).data('price');
-				var removeDecimal = 100 * element.toFixed(2);
+				var removeDecimal = Math.round(100 * element.toFixed(2));
 				var dineroAmount = Dinero({ amount: removeDecimal, currency: 'USD' });
 				return dineroAmount;
 			} else {
@@ -119,7 +125,6 @@
 		}
 
 		var beforeDiscounts = [];
-
 		beforeDiscounts = [
 			getDiscount('price_col1-beforeDiscount'),
 			getDiscount('price_col2-beforeDiscount'),
@@ -140,13 +145,13 @@
 		$('#addcov-buttons .btn').click(function() {
 			if( $( this ).hasClass('active') ) {
 				$( this ).removeClass('active');
-				if(disc_single.length === 0){
+				if(!isSingleDiscount){
 					changeDiscount($( this ).data('discount'));
 				}
 				visibilityCheck();
 			} else {
 				$( this ).addClass('active');
-				if(disc_single.length === 0){
+				if(!isSingleDiscount){
 					changeDiscount($( this ).data('discount'));
 				}
 				visibilityCheck();
@@ -155,32 +160,36 @@
 		});
 		
 		if ( $( "#additcoverage" ).length ) {
-			if(disc_single.length > 0){
-				$('#price_col1_discount, #price_col2_discount, #price_col3_discount, #price_col4_discount').text(disc_single);
-				$('#price_col1_todaysprice').text(price_col1_beforeDiscount - disc_single);
-				$('#price_col2_todaysprice').text(price_col2_beforeDiscount - disc_single);
-				$('#price_col3_todaysprice').text(price_col3_beforeDiscount - disc_single);
-				$('#price_col4_todaysprice').text(price_col4_beforeDiscount - disc_single);
+			if(isSingleDiscount){
+				var singleDiscount = $( '#row-discount' ).data('discount');
+				changeDiscount(singleDiscount);
 			}
 		}
 		
 		
-		function changeDiscount() {
-			var discountsActive = $('.btn.btn-primary.active').map(function() {
-				return $(this).data('discount');
-			}).toArray();
-
-			var discountsActiveNew = $.map( discountsActive, function( value ) {
-				var newValue = Math.round(100 * value.toFixed(2));
-				return newValue;
-			});
-
-			var discountReducer = function(a, b) {
-				return a + b;
+		function changeDiscount(discount_amt) {
+			console.log(discount_amt);
+			if(!isSingleDiscount) {
+				var discountsActive = $('.btn.btn-primary.active').map(function() {
+					return $(this).data('discount');
+				}).toArray();
+	
+				var discountsActiveNew = $.map( discountsActive, function( value ) {
+					var newValue = Math.round(100 * value.toFixed(2));
+					return newValue;
+				});
+	
+				var discountReducer = function(a, b) {
+					return a + b;
+				}
+	
+				var discountTotal = discountsActiveNew.reduce(discountReducer, 0); 
+			} else {
+				
+				var discount_amt_processed = Math.round(100 * discount_amt.toFixed(2));
+				var discountTotal = discount_amt_processed;
 			}
-
-			var discountTotal = discountsActiveNew.reduce(discountReducer, 0);
- 
+			
 			$('#price_col1_discount,#price_col2_discount,#price_col3_discount,#price_col4_discount').text( Dinero({amount: discountTotal}).toFormat() );
 			
 			$.each(beforeDiscounts, function(index,value){
@@ -194,8 +203,13 @@
 
 
 		//Discount tool on 'Additional Coverage Package with prices 2020' Slide 
-		var beforeDiscounts_prices = [];
+		if( $('#addcov_prices-table').hasClass('discount-cumulative')) {
+			var isSingleDiscount_prices = false;
+		} else {
+			var isSingleDiscount_prices = true;
+		}
 
+		var beforeDiscounts_prices = [];
 		beforeDiscounts_prices = [
 			getDiscount('total_price_col1-beforeDiscount'),
 			getDiscount('total_price_col2-beforeDiscount'),
@@ -218,14 +232,16 @@
 			if( $( this ).hasClass('active') ) {
 				$( this ).removeClass('active');
 				addcov_prices_visibilityCheck();
-				if(addcov_prices_disc_single.length === 0){
+				if(!isSingleDiscount_prices){
+					console.log(addcov_prices_disc_single.length);
 					addcov_prices_changeDiscount($( this ).data('discount'));
 				}
 				
 			} else {
 				$( this ).addClass('active');
 				addcov_prices_visibilityCheck();
-				if(addcov_prices_disc_single.length === 0){
+				if(!isSingleDiscount_prices){
+					console.log(addcov_prices_disc_single.length);
 					addcov_prices_changeDiscount($( this ).data('discount'));
 				}
 			}
@@ -233,32 +249,34 @@
 		});
 
 		if ( $( "#addcov_prices_additcoverage" ).length ) {
-			if(addcov_prices_disc_single.length > 0){
-				$('#total_price_col1_discount, #total_price_col2_discount, #total_price_col3_discount, #total_price_col4_discount').text(addcov_prices_disc_single);
-				$('#total_price_col1_todaysprice').text(totPrice_col1_beforeDiscountDinero - addcov_prices_disc_single);
-				$('#total_price_col2_todaysprice').text(totPrice_col2_beforeDiscountDinero - addcov_prices_disc_single);
-				$('#total_price_col3_todaysprice').text(totPrice_col3_beforeDiscountDinero - addcov_prices_disc_single);
-				$('#total_price_col4_todaysprice').text(totPrice_col4_beforeDiscountDinero - addcov_prices_disc_single);
+			if(isSingleDiscount_prices){
+				var singleDiscount = $( '#addcov_prices_row-discount' ).data('discount');
+				addcov_prices_changeDiscount(singleDiscount);
 			}
 		}
 
-		function addcov_prices_changeDiscount() {
+		function addcov_prices_changeDiscount(discount_amt) {
 			
-
-			var discountsActive_Prices = $('.btn.btn-primary.active').map(function() {
-				return $(this).data('discount');
-			}).toArray();
-
-			var discountsActive_PricesNew = $.map( discountsActive_Prices, function( value ) {
-				var newValue = Math.round(100 * value.toFixed(2));
-				return newValue;
-			});
-
-			var discountReducer = function(a, b) {
-				return a + b;
+			if(!isSingleDiscount_prices) {
+				var discountsActive_Prices = $('.btn.btn-primary.active').map(function() {
+					return $(this).data('discount');
+				}).toArray();
+	
+				var discountsActive_PricesNew = $.map( discountsActive_Prices, function( value ) {
+					var newValue = Math.round(100 * value.toFixed(2));
+					return newValue;
+				});
+	
+				var discountReducer = function(a, b) {
+					return a + b;
+				}
+	
+				var discountTotal = discountsActive_PricesNew.reduce(discountReducer, 0);
+			} else {
+				var discount_amt_processed = Math.round(100 * discount_amt.toFixed(2));
+				var discountTotal = discount_amt_processed;
 			}
-
-			var discountTotal = discountsActive_PricesNew.reduce(discountReducer, 0);
+			
 			// console.log("total " + discountTotal);
 			
 			// console.log(discountsActive);

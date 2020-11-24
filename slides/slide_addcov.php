@@ -22,7 +22,7 @@
         </symbol>
       </svg>
       
-      <table id="addcov-table" class="table table-dps table-striped table-bordered">						
+      <table id="addcov-table" class="table table-dps table-striped table-bordered discount-<?php echo get_sub_field('discount_type'); ?>">						
       
       <?php 
         $coverageColumns = get_sub_field('discount_columns'); 
@@ -142,14 +142,14 @@
     $aaa = get_sub_field('discount_aaa');
     $firstresponder = get_sub_field('discount_firstresponder');
     $single = get_sub_field('discount_single');
+   
+    if($discountType === 'single') {
+      $single_amt = $single;
+    } else {
+      $single_amt = '0';
+    }
   ?>
-  <script type="text/javascript">
-    var disc_single = "";
-    <?php if($discountType === 'single') { ?>
-      disc_single = "<?php echo $single ?>";
-    <?php } ?>
-  </script>
-  <div id="row-discount" class="">
+  <div id="row-discount" class="" data-discount="<?php echo $single_amt;  ?>">
     <div style="width: <?php echo $width_col1; ?>%;">DISCOUNT</div>
     <?php $n3 = 0;
     foreach ($coverageColumns as $cov) {

@@ -396,12 +396,23 @@ body {
   float: left;
   margin-top: 5px;
 }
-#dealerinfo .dealerinfo-buttons li a.coupons { background-color: #2196F3; }
-#dealerinfo .dealerinfo-buttons li .coupons:hover { background-color: #1E88E5; }
-#dealerinfo .dealerinfo-buttons li a.browse { background-color: #f44336; }
-#dealerinfo .dealerinfo-buttons li .browse:hover { background-color: #e53935; }
-#dealerinfo .dealerinfo-buttons li a.service { background-color: #4CAF50; }
-#dealerinfo .dealerinfo-buttons li .service:hover { background-color: #43A047; }
+.dealerinfo-buttons a.dealerinfo_custombtn_red:before,
+.dealerinfo-buttons a.dealerinfo_custombtn_blue:before,
+.dealerinfo-buttons a.dealerinfo_custombtn_green:before {
+  content: none;
+}
+#dealerinfo .dealerinfo-buttons li a.coupons,
+#dealerinfo .dealerinfo-buttons li a.dealerinfo_custombtn_blue { background-color: #2196F3; }
+#dealerinfo .dealerinfo-buttons li .coupons:hover,
+#dealerinfo .dealerinfo-buttons li a.dealerinfo_custombtn_blue:hover { background-color: #1E88E5; }
+#dealerinfo .dealerinfo-buttons li a.browse,
+#dealerinfo .dealerinfo-buttons li a.dealerinfo_custombtn_red { background-color: #f44336; }
+#dealerinfo .dealerinfo-buttons li .browse:hover,
+#dealerinfo .dealerinfo-buttons li a.dealerinfo_custombtn_red:hover { background-color: #e53935; }
+#dealerinfo .dealerinfo-buttons li a.service,
+#dealerinfo .dealerinfo-buttons li a.dealerinfo_custombtn_green { background-color: #4CAF50; }
+#dealerinfo .dealerinfo-buttons li .service:hover,
+#dealerinfo .dealerinfo-buttons li a.dealerinfo_custombtn_green:hover { background-color: #43A047; }
 
 .dealerinfo-buttons .coupons:before { 
 	background-image: url(../img/dealerinfo/btn_coupon-white.svg); 

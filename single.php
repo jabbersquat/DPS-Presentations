@@ -32,7 +32,7 @@
 				
 				$logo = get_field('dealer_logo');
 				set_query_var('presentation_logo', $logo['url']);
-				$name = get_field('dealer_name');
+				$dealer_name = get_field('dealer_name');
 			?>
 			
 			

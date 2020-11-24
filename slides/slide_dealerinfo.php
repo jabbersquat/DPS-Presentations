@@ -23,15 +23,45 @@
     </div>
     <div class="col-xs-6">
     <?php
-      $coupons = get_sub_field('dealerinfo_servicecoupons');
-      $browse = get_sub_field('dealerinfo_browseinventory');
-      $service = get_sub_field('dealerinfo_scheduleservice');
+	    $dealerInfoBtns = [];      
+      
+      if( have_rows('dealerinfo_custombtn') ) {
+	      
+	      while( have_rows('dealerinfo_custombtn') ) : the_row();
 
-      if( $coupons || $browse || $service ): ?>
-      <ul class="dealerinfo-buttons">
-        <?php if( $service ){ ?><li><a class="btn btn-lg service" href="<?php echo $service; ?>" target="_blank">Schedule Service</a></li><?php }; ?>
-        <?php if( $coupons ){ ?><li><a class="btn btn-lg coupons" href="<?php echo $coupons; ?>" target="_blank">Service Coupons</a></li><?php }; ?>
-        <?php if( $browse ){ ?><li><a class="btn btn-lg browse" href="<?php echo $browse; ?>" target="_blank">Browse Inventory</a></li><?php }; ?>
+        	$class = 'dealerinfo_custombtn_'.get_sub_field('dealerinfo_custombtn_color');
+        	$buttonDetails = (object) [
+			      'class' => $class,
+	          'label' => get_sub_field('dealerinfo_custombtn_label'),
+	          'url' => get_sub_field('dealerinfo_custombtn_url'),
+	        ];
+	        $dealerInfoBtns[] = $buttonDetails;
+
+				endwhile;
+				
+      } else {
+	      $service = get_sub_field('dealerinfo_scheduleservice');
+	      if($service){
+		      $buttonDetails = (object) [ 'class' => 'service', 'label' => 'Schedule Service', 'url' => $service, ];
+	        $dealerInfoBtns[] = $buttonDetails;
+	      }
+	      $coupons = get_sub_field('dealerinfo_servicecoupons');
+	      if($coupons){
+		      $buttonDetails = (object) [ 'class' => 'coupons', 'label' => 'Service Coupons', 'url' => $coupons, ];
+	        $dealerInfoBtns[] = $buttonDetails;
+	      }
+	      $browse = get_sub_field('dealerinfo_browseinventory');
+	      if($coupons){
+		      $buttonDetails = (object) [ 'class' => 'browse', 'label' => 'Browse Inventory', 'url' => $browse, ];
+	        $dealerInfoBtns[] = $buttonDetails;
+	      }
+      }
+
+      if( $dealerInfoBtns ): ?>
+      <ul class="dealerinfo-buttons"> 
+	      <?php foreach ($dealerInfoBtns as $btn) { ?>
+	        <li><a class="btn btn-lg <?php echo $btn->class; ?>" href="<?php echo $btn->url; ?>" target="_blank"><?php echo $btn->label; ?></a></li>
+        <?php } ?>
       </ul>
       <?php endif; ?>
     </div>

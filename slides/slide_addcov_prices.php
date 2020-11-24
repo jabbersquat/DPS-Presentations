@@ -13,7 +13,7 @@
   <div class="row">
     <div class="col-xs-12">
       
-      <table id="addcov_prices-table" class="table table-dps table-striped table-bordered">						
+      <table id="addcov_prices-table" class="table table-dps table-striped table-bordered discount-<?php echo get_sub_field('addcov_prices_discount_type'); ?>">						
       
       <?php 
         $coverageColumns = get_sub_field('addcov_columns'); 
@@ -133,14 +133,13 @@
   <?php 
     $addcov_prices_discountType = get_sub_field('addcov_prices_discount_type');
     $addcov_prices_single = get_sub_field('addcov_prices_single_discount_amount');
+    if ($addcov_prices_discountType === 'single') {
+      $single_amt_prices = $addcov_prices_single;
+    } else {
+      $single_amt_prices = '0';
+    } 
   ?>
-  <script type="text/javascript">
-    var addcov_prices_disc_single = "";
-    <?php if($addcov_prices_discountType === 'single') { ?>
-      addcov_prices_disc_single = "<?php echo $addcov_prices_single ?>";
-    <?php } ?>
-  </script>
-  <div id="addcov_prices_row-discount" class="">
+  <div id="addcov_prices_row-discount" class="" data-discount="<?php echo $single_amt_prices;  ?>">
     <div style="width: <?php echo $width_col1; ?>%;">DISCOUNT</div>
     <?php $n3 = 0;
     foreach ($coverageColumns as $cov) {

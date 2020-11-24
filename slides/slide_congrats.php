@@ -6,6 +6,7 @@
 
 $logoUrl = get_query_var('presentation_logo');
 $bg = get_sub_field('slide_congrats_bg');
+$dealer_name = get_field('dealer_name');
 ?> 
 
 <section id="congrats" 
@@ -15,7 +16,7 @@ $bg = get_sub_field('slide_congrats_bg');
       <div class="module-wrapper">
         <div class="logo"><img src="<?php echo $logoUrl; ?>"></div>
         <p class="congrats-p">Congratulations on your purchase from </p>
-        <h1><?php echo $name; ?></h1>
+        <h1><?php echo $dealer_name; ?></h1>
         
       </div>
     </div>
