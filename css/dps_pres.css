@@ -382,11 +382,39 @@ body {
   font-size: 1.2em;
   line-height: 80px;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #dealerinfo .dealerinfo-buttons li a:hover {
 	background-color: #505253;
 	color: #fff;
 }
+#dealerinfo .dealerinfo_btnTxt_wrapper {
+	flex: 1 1 auto;
+}
+
+
+#dealerinfo .dealerinfo_btnIcon_wrapper {
+	width: 70px;
+	height: 70px;
+	margin: 10px 0;
+	overflow: hidden;
+	background-color: #ffffff;
+	border-radius: 50%;
+	text-align: center;
+	display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 1 70px;
+}
+
+#dealerinfo .dealerinfo_btnIcon {
+	width: 70%;
+	height: auto;
+	margin: 0 auto;
+}
+/*
 .dealerinfo-buttons a:before {
   height: 70px;
   width: 70px;
@@ -396,6 +424,7 @@ body {
   float: left;
   margin-top: 5px;
 }
+*/
 .dealerinfo-buttons a.dealerinfo_custombtn_red:before,
 .dealerinfo-buttons a.dealerinfo_custombtn_blue:before,
 .dealerinfo-buttons a.dealerinfo_custombtn_green:before {
@@ -414,6 +443,8 @@ body {
 #dealerinfo .dealerinfo-buttons li .service:hover,
 #dealerinfo .dealerinfo-buttons li a.dealerinfo_custombtn_green:hover { background-color: #43A047; }
 
+
+/*
 .dealerinfo-buttons .coupons:before { 
 	background-image: url(../img/dealerinfo/btn_coupon-white.svg); 
   background-size: 60px 60px;
@@ -427,6 +458,7 @@ body {
   background-size: 55px 55px;
   margin-top: 10px;
 }
+*/
 
 
 #dealerinfo .websiteImage {

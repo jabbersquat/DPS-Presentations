@@ -23,17 +23,30 @@
     </div>
     <div class="col-xs-6">
     <?php
-	    $dealerInfoBtns = [];      
+      $dealerInfoBtns = [];
+      $icon_service_uri = get_template_directory_uri() . '/img/dealerinfo/btn_schedule-black.svg';
+      $icon_coupon_uri = get_template_directory_uri() . '/img/dealerinfo/btn_coupon-black.svg';
+      $icon_inventory_uri = get_template_directory_uri() . '/img/dealerinfo/btn_inventory-black.svg';
+      
       
       if( have_rows('dealerinfo_custombtn') ) {
 	      
 	      while( have_rows('dealerinfo_custombtn') ) : the_row();
 
-        	$class = 'dealerinfo_custombtn_'.get_sub_field('dealerinfo_custombtn_color');
+          $class = 'dealerinfo_custombtn_'.get_sub_field('dealerinfo_custombtn_color');
+          $icon = get_sub_field('dealerinfo_custombtn_icon');
+
+          if($icon === "service") { $icon_uri = $icon_service_uri; }
+          elseif($icon === "coupon") { $icon_uri =  $icon_coupon_uri; }
+          elseif($icon === "inventory") { $icon_uri =  $icon_inventory_uri; }
+          elseif($icon === "custom") { $icon_uri = get_sub_field('dealerinfo_custombtn_icon_custom'); } 
+          else { $icon_uri = false; }
+
         	$buttonDetails = (object) [
 			      'class' => $class,
 	          'label' => get_sub_field('dealerinfo_custombtn_label'),
 	          'url' => get_sub_field('dealerinfo_custombtn_url'),
+	          'icon' => $icon_uri,
 	        ];
 	        $dealerInfoBtns[] = $buttonDetails;
 
@@ -42,17 +55,17 @@
       } else {
 	      $service = get_sub_field('dealerinfo_scheduleservice');
 	      if($service){
-		      $buttonDetails = (object) [ 'class' => 'service', 'label' => 'Schedule Service', 'url' => $service, ];
+		      $buttonDetails = (object) [ 'class' => 'service', 'label' => 'Schedule Service', 'url' => $service, 'icon' => $icon_service_uri, ];
 	        $dealerInfoBtns[] = $buttonDetails;
 	      }
 	      $coupons = get_sub_field('dealerinfo_servicecoupons');
 	      if($coupons){
-		      $buttonDetails = (object) [ 'class' => 'coupons', 'label' => 'Service Coupons', 'url' => $coupons, ];
+		      $buttonDetails = (object) [ 'class' => 'coupons', 'label' => 'Service Coupons', 'url' => $coupons, 'icon' => $icon_coupon_uri, ];
 	        $dealerInfoBtns[] = $buttonDetails;
 	      }
 	      $browse = get_sub_field('dealerinfo_browseinventory');
 	      if($coupons){
-		      $buttonDetails = (object) [ 'class' => 'browse', 'label' => 'Browse Inventory', 'url' => $browse, ];
+		      $buttonDetails = (object) [ 'class' => 'browse', 'label' => 'Browse Inventory', 'url' => $browse, 'icon' => $icon_inventory_uri, ];
 	        $dealerInfoBtns[] = $buttonDetails;
 	      }
       }
@@ -60,7 +73,12 @@
       if( $dealerInfoBtns ): ?>
       <ul class="dealerinfo-buttons"> 
 	      <?php foreach ($dealerInfoBtns as $btn) { ?>
-	        <li><a class="btn btn-lg <?php echo $btn->class; ?>" href="<?php echo $btn->url; ?>" target="_blank"><?php echo $btn->label; ?></a></li>
+	        <li>
+	        	<a class="btn btn-lg <?php echo $btn->class; ?>" href="<?php echo $btn->url; ?>" target="_blank">
+		        	<?php if($btn->icon) { echo '<div class="dealerinfo_btnIcon_wrapper"><img class="dealerinfo_btnIcon" src='. $btn->icon .'></div>'; } ?>
+		        	<span class="dealerinfo_btnTxt_wrapper"><?php echo $btn->label; ?></span>
+		        </a>
+		      </li>
         <?php } ?>
       </ul>
       <?php endif; ?>
